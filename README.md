@@ -13,4 +13,4 @@ __Python__: pyautogui
 
 __Chrome Vysor__: mobile mirroring software
 
-!(https://github.com/mapattacker/castletd2-bot/blob/master/Screenshot.png)
+![screenshot](https://github.com/mapattacker/castletd2-bot/blob/master/Screenshot.png)
