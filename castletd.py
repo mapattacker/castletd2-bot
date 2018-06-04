@@ -172,13 +172,13 @@ def restart():
             break
         # account for vertical rotation when displaying ads
         # previous histogram testing shown the quantity of colors fall within 980-1050
-        elif 980 > colorrecognition(vertical_button) < 1050:
-            print ('Vertical Ad')
+        elif 980 < colorrecognition(vertical_button) < 1050:
+            print ('Vertical Ad:', colorrecognition(vertical_button))
             time.sleep(1)
             pyautogui.click(backbuttonV)
             time.sleep(3)
-        elif 980 > colorrecognition(horizontal_button) < 1050:
-            print ('Horizontal Ad')
+        elif 980 < colorrecognition(horizontal_button) < 1050:
+            print ('Horizontal Ad:', colorrecognition(horizontal_button))
             time.sleep(1)
             pyautogui.click(backbutton)
             time.sleep(3)
