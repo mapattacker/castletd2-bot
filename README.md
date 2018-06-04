@@ -1,4 +1,4 @@
-## Castle TD2 bot
+## Castle Defense 2 bot
 
 Games nowadays usually require insane amount of time to farm resources for upgrading and purchase of items. For mobile games especially, it is harder to write a bot since the script will have to be ported over to the phone.
 
