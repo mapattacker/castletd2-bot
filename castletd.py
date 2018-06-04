@@ -19,8 +19,8 @@ screenshot_button = "screencapture {}".format(img_path_button)
 # cropping of screenshots
 wood = (70, 180, 150, 210)
 end_msg = (450, 300, 780, 360)
-horizontal_button = (0,0,100,870)
-vertical_button = (0,0,100,870)
+horizontal_button = (0,800,100,870)
+vertical_button = (0,1400,80,1450)
 # tower positions
 list = [(306, 293), (362, 269), (405, 244), (450, 218), \
         (383, 201), (312, 197), (233, 202), (165, 219), \
@@ -60,7 +60,7 @@ def colorrecognition(button):
     # change list into nparray so that can use np.histogram
     rbg = np.array(cropped.histogram())
     # get the first binned quantity
-    return int(np.histogram(rbg, bins=50, range=(0,500))[0][0])
+    return int(np.histogram(rbg, bins=200, range=(0,500))[0][0])
 
 def upgrade1st():
     # 1st tower upgrade
@@ -162,8 +162,6 @@ def restart():
                 time.sleep(5)
                 pass
 
-    restart = [backbutton, backbuttonV, backbuttonV, backbutton, backbutton, backbuttonV, backbuttonV, backbuttonV]
-
     for num in range(8):
         objectrecognition()
         time.sleep(3)
@@ -173,16 +171,16 @@ def restart():
             pyautogui.click(restartbutton)
             break
         # account for vertical rotation when displaying ads
-        # previous histogram testing shown the quantity of colors fall within 900-1000
-        elif 900 > colorrecognition(horizontal_button) < 1100:
-            print ('horizontal')
-            time.sleep(1)
-            pyautogui.click(backbutton)
-            time.sleep(3)
-        elif 900 > colorrecognition(vertical_button) < 1100:
-            print ('vertical')
+        # previous histogram testing shown the quantity of colors fall within 980-1050
+        elif 980 > colorrecognition(vertical_button) < 1050:
+            print ('Vertical Ad')
             time.sleep(1)
             pyautogui.click(backbuttonV)
+            time.sleep(3)
+        elif 980 > colorrecognition(horizontal_button) < 1050:
+            print ('Horizontal Ad')
+            time.sleep(1)
+            pyautogui.click(backbutton)
             time.sleep(3)
 
     endt = time.time()
@@ -193,7 +191,7 @@ def restart():
 
 
 # define number of rounds to loop
-for num in range(1, 11):
+for num in range(5):
     # flag for ending
     global end
     end = 0
