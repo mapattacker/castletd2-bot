@@ -3,6 +3,7 @@ import time
 from PIL import Image
 import pytesseract
 import os
+import numpy as np
 
 
 startall = time.time()
@@ -11,11 +12,15 @@ text = '1'
 # speed button
 speed = (552, 98)
 # screenshot directory
-img_path = r'/Users/xxx/Desktop/screenshots/screen.png'
+img_path = r'screen.png'
+img_path_button = r'button.png'
 screenshot = "screencapture {}".format(img_path)
+screenshot_button = "screencapture {}".format(img_path_button)
 # cropping of screenshots
 wood = (70, 180, 150, 210)
 end_msg = (450, 300, 780, 360)
+horizontal_button = (0,0,100,870)
+vertical_button = (0,0,100,870)
 # tower positions
 list = [(306, 293), (362, 269), (405, 244), (450, 218), \
         (383, 201), (312, 197), (233, 202), (165, 219), \
@@ -47,6 +52,15 @@ def objectrecognition():
     global text
     text = pytesseract.image_to_string(cropped) # OCR to text
 
+def colorrecognition(button):
+    # screenshot to check for blue button position
+    os.system(screenshot_button)
+    img = Image.open(img_path_button)
+    cropped = img.crop(button)
+    # change list into nparray so that can use np.histogram
+    rbg = np.array(cropped.histogram())
+    # get the first binned quantity
+    return int(np.histogram(rbg, bins=50, range=(0,500))[0][0])
 
 def upgrade1st():
     # 1st tower upgrade
@@ -64,13 +78,14 @@ def upgrade1st():
         # OCR
         objectrecognition()
         if text == 'Emergency':
-            print(1, 'Game ended')
             global end
             end = 1
+            print(1, 'Game ended')
+            # click cancel button when game ends
+            pyautogui.click(cancelbutton)
             break
         else:
             pass
-
 
 def upgrade2nd():
     # 2nd tower upgrade
@@ -92,19 +107,20 @@ def upgrade2nd():
             # OCR
             objectrecognition()
             if text == 'Emergency':
-                print(2, 'Game ended')
                 end = 1
+                print(2, 'Game ended')
+                # click cancel button when game ends
+                pyautogui.click(cancelbutton)
                 break
             else:
                 pass
 
-
 def finalupgrade():
-    # Final tower upgrade
+    # Final tower upgrades
     global end
     if end != 1:
         for zz, i in enumerate(list):
-            # remove 2 towers upgrade to hasten the pace
+            # remove 2 towers upgrade so it won't kill the boss
             if zz != 3 and zz != 4:
                 a = i
                 pyautogui.click(a)
@@ -123,14 +139,15 @@ def finalupgrade():
                 if text == 'Emergency':
                     end = 1
                     print(3, 'Game ended')
+                    # click cancel button when game ends
+                    pyautogui.click(cancelbutton)
                     break
                 else:
                     pass
-                
         
 
 def restart():
-    # cancel, remove ad, restart game
+    # cancel, remove ad, restart
 
     # begin restart if OCR finds game has ended
     if end != 1:
@@ -147,23 +164,37 @@ def restart():
 
     restart = [backbutton, backbuttonV, backbuttonV, backbutton, backbutton, backbuttonV, backbuttonV, backbuttonV]
 
-    for a, i in enumerate(restart):
+    for num in range(8):
         objectrecognition()
+        time.sleep(3)
         if text == 'Defeat':
             # click restart button if it appears
-            print('restart button shown')
+            print('Restart Button Shown')
             pyautogui.click(restartbutton)
             break
-        else:
-            # wait for ad to appear after clicking cancel
-            if a == 0:
-                time.sleep(5)
-                pyautogui.click(i)
-            # for others, can just click fast at 1 sec rate
-            else:
-                time.sleep(2)
-                pyautogui.click(i)
-                time.sleep(3)
+        # account for vertical rotation when displaying ads
+        # previous histogram testing shown the quantity of colors fall within 900-1000
+        elif 900 > colorrecognition(horizontal_button) < 1100:
+            print ('horizontal')
+            time.sleep(1)
+            pyautogui.click(backbutton)
+            time.sleep(3)
+        elif 900 > colorrecognition(vertical_button) < 1100:
+            print ('vertical')
+            time.sleep(1)
+            pyautogui.click(backbuttonV)
+            time.sleep(3)
+
+        # else:
+        #     # wait for ad to appear after clicking cancel
+        #     if a == 0:
+        #         time.sleep(5)
+        #         pyautogui.click(i)
+        #     # for others, can just click fast at 1 sec rate
+        #     else:
+        #         time.sleep(3)
+        #         pyautogui.click(i)
+        #         time.sleep(3)
 
     endt = time.time()
     if num == 1:
@@ -172,8 +203,8 @@ def restart():
         print (num, 'rounds down,', 360*num, 'diamonds earned! after', round((endt-startt)/60,2), 'mins')
 
 
-
-for num in range(1, 5):
+# define number of rounds to loop
+for num in range(1, 11):
     # flag for ending
     global end
     end = 0

@@ -6,12 +6,20 @@ There are two ways to overcome this. One is to install the mobile OS in a virtua
 
 The python library pyautogui help to simulate mouse-clicks on the window so that an entirely rule-based system based on clicking an x,y coordinate can be coded. This example uses stage **15-3** of the game **Castle TD2**. It will build and upgrade all towers to reach the last level in the stage but not completing it (completing a stage drastically reduces the amount of diamonds collected on subsequent tries). 
 
+#### Using OCR
+
 I have added a level of intelligence to the bot using object character recognition (OCR). The script takes screenshots of the game periodically and crop the image to a specific popup to detect if the game has ended so that it can auto restart.
 
-The next level of the bot is to employ image recognition so that I can command the bot to a next level of automation. Stay tune!
+#### Using RBG Histogram Quantities
+
+The 2nd level of intelligence, while a rudimentary form of classification, is effective by using cropped screenshots to recognise the colours of a particular image. I used pillow and numpy to grab the first count of histogram bar to identify the back button. This button might be at two different positions because the phone will switch from landscape to mobile depending on the auto-advertisement being shown.
+
+#### Next Phase
+
+The next level of the bot is to employ image recognition so that I can command the bot autodetect locations to build towers instead of hard coding them. Stay tune!
 
 ### Dependencies
-__Python__: pyautogui, pytesseract, pillow
+__Python__: pyautogui, pytesseract, pillow, numpy
 
 __Chrome Vysor__: mobile mirroring software
 
