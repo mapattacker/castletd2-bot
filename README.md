@@ -8,7 +8,7 @@ The python library pyautogui help to simulate mouse-clicks on the window so that
 
 #### Using OCR
 
-I have added a level of intelligence to the bot using object character recognition (OCR). The script takes screenshots of the game periodically and crop the image to a specific popup to detect if the game has ended so that it can auto restart.
+I have added a level of intelligence to the bot using object character recognition (OCR). The script takes screenshots of the game periodically and crop the image to a specific popup message to detect if the game has ended so that it can auto restart.
 
 #### Using RBG Histogram Quantities
 
@@ -16,7 +16,7 @@ The 2nd level of intelligence, while a rudimentary form of classification, is ef
 
 #### Next Phase
 
-The next level of the bot is to employ image recognition so that I can command the bot autodetect locations to build towers instead of hard coding them. Stay tune!
+The next level of the bot is to employ image recognition so that I can command the bot to autodetect locations to build towers instead of hard coding them. Stay tune!
 
 ### Dependencies
 __Python__: pyautogui, pytesseract, pillow, numpy

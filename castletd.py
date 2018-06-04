@@ -80,7 +80,7 @@ def upgrade1st():
         if text == 'Emergency':
             global end
             end = 1
-            print(1, 'Game ended')
+            print(1, 'Game Ended')
             # click cancel button when game ends
             pyautogui.click(cancelbutton)
             break
@@ -108,7 +108,7 @@ def upgrade2nd():
             objectrecognition()
             if text == 'Emergency':
                 end = 1
-                print(2, 'Game ended')
+                print(2, 'Game Ended')
                 # click cancel button when game ends
                 pyautogui.click(cancelbutton)
                 break
@@ -138,7 +138,7 @@ def finalupgrade():
                 objectrecognition()
                 if text == 'Emergency':
                     end = 1
-                    print(3, 'Game ended')
+                    print(3, 'Game Ended')
                     # click cancel button when game ends
                     pyautogui.click(cancelbutton)
                     break
@@ -147,7 +147,7 @@ def finalupgrade():
         
 
 def restart():
-    # cancel, remove ad, restart
+    # remove advert and restart game
 
     # begin restart if OCR finds game has ended
     if end != 1:
@@ -184,17 +184,6 @@ def restart():
             time.sleep(1)
             pyautogui.click(backbuttonV)
             time.sleep(3)
-
-        # else:
-        #     # wait for ad to appear after clicking cancel
-        #     if a == 0:
-        #         time.sleep(5)
-        #         pyautogui.click(i)
-        #     # for others, can just click fast at 1 sec rate
-        #     else:
-        #         time.sleep(3)
-        #         pyautogui.click(i)
-        #         time.sleep(3)
 
     endt = time.time()
     if num == 1:
@@ -253,5 +242,5 @@ for num in range(1, 11):
 
 
 endall = time.time()
-print('game ended after {} mins'.format(round((endall-startall)/60,2)))
+print('Game Ended after {} mins'.format(round((endall-startall)/60,2)))
 # print(pyautogui.position())
