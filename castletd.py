@@ -181,7 +181,7 @@ def finalupgrade():
     global end
     if end != 1:
         for zz, i in enumerate(tpositions):
-            # remove 2 towers upgrade so it won't kill the boss
+            # remove some tower upgrades so it won't kill the boss
             if zz != 2 and zz != 3 and zz != 4:
                 a = i
                 pyautogui.click(a)
