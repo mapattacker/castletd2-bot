@@ -13,10 +13,6 @@ import pyautogui
 startall = time.time()
 # get screen resolution
 screensize = pyautogui.size()
-# define initial OCR text variable
-text = '1'
-# speed button
-speed = (552, 98)
 # screenshot directory
 img_path = r'screen.png'
 img_path_button = r'button.png'
@@ -24,17 +20,22 @@ img_path_template= r'template_match.png'
 screenshot = "screencapture {}".format(img_path)
 screenshot_button = "screencapture {}".format(img_path_button)
 screenshot_template = "screencapture {}".format(img_path_template)
-# cropping of screenshots
+
+# CROPPING of screenshots
 wood = (70, 180, 150, 210)
 end_msg = (450, 300, 780, 360)
 horizontal_button = (0,800,100,870)
 vertical_button = (0,1400,80,1450)
 map = (10,210,1240,690)
+
+# POSITIONS
+# speed button
+speed = (552, 98)
 # upgrade to lasers
 upgrade = [(27,32),(0,-54),(29,-37),(0,-61)]
 hero = [(36, 183),(587, 136)]
 hero2 = (36, 138)
-start = (587, 331)
+start = (337, 372)
 # back button of vysor
 backbutton = (102, 418) # horizontal
 backbuttonV = (51, 708) # vertical
@@ -43,6 +44,7 @@ restartbutton =(361, 296)
 
 
 def take2nd(elem):
+    # for sorting 2nd position of a tuple within a list
     return elem[1]
 
 def templatematching():
@@ -60,17 +62,16 @@ def templatematching():
     # read in template
     sign = imread('sign.png')
 
-
     # Template matching, results gives a correlation coefficient for all pixels in image
     result = match_template(cropped, sign)
-    # Flatten, sort, and top 20 coefficient values'
+    # Flatten, sort, and top n coefficient values'
     d = result.flatten()
     e = np.sort(d)[::-1][:20]
 
     # extract all coordinates
     list = []
     for i in e:
-        # locate indexes from top 10 values
+        # locate indexes from top n values
         top = np.argwhere(d==i)[0][0]
         # obtain coordinates from index
         ij = np.unravel_index(top, result.shape)
@@ -101,7 +102,7 @@ def templatematching():
     
     # change the coordinates of screenshot to actual computer screen coordinates
     list2 = [(one * ratio, two * ratio) for one, two in list2]
-    # order it such that it builds from bottom to top
+    # order it such that tower builds from bottom to top
     return sorted(list2, reverse=True, key=take2nd)
 
 def objectrecognition():
@@ -110,8 +111,7 @@ def objectrecognition():
     img = Image.open(img_path)
     cropped = img.crop(end_msg)
     # declare OCR output variable as global
-    global text
-    text = pytesseract.image_to_string(cropped) # OCR to text
+    return pytesseract.image_to_string(cropped) # OCR to text
 
 def colorrecognition(button):
     # screenshot to check for blue button position
@@ -138,7 +138,7 @@ def upgrade1st():
             time.sleep(1)
 
         # OCR
-        objectrecognition()
+        text = objectrecognition()
         if text == 'Emergency':
             global end
             end = 1
@@ -166,7 +166,7 @@ def upgrade2nd():
                 time.sleep(1)
 
             # OCR
-            objectrecognition()
+            text = objectrecognition()
             if text == 'Emergency':
                 end = 1
                 print(2, 'Game Ended')
@@ -195,7 +195,7 @@ def finalupgrade():
                     time.sleep(1)
 
                 # OCR
-                objectrecognition()
+                text = objectrecognition()
                 if text == 'Emergency':
                     end = 1
                     print(3, 'Game Ended')
@@ -204,15 +204,14 @@ def finalupgrade():
                     break
                 else:
                     pass
-        
 
 def restart(num):
     # remove advert and restart game
 
     # begin restart if OCR finds game has ended
     if end != 1:
-        for i in range(20):
-            objectrecognition()
+        for i in range(30):
+            text = objectrecognition()
             if text == 'Emergency':
                 print(4, 'Game Ended')
                 # click cancel button when game ends
@@ -223,7 +222,7 @@ def restart(num):
                 pass
 
     for i in range(8):
-        objectrecognition()
+        text = objectrecognition()
         time.sleep(3)
         if text == 'Defeat':
             # click restart button if it appears
