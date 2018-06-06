@@ -14,12 +14,12 @@ I have added a level of intelligence to the bot using object character recogniti
 
 The 2nd level of intelligence, while a rudimentary form of classification, is effective by using cropped screenshots to recognise the colours of a particular image. I used pillow and numpy to grab the first count of histogram bar to identify the back button. This button might be at two different positions because the phone will switch from landscape to mobile depending on the auto-advertisement being shown.
 
-#### Next Phase
+#### Template Matching
 
-The next level of the bot is to employ image recognition so that I can command the bot to autodetect locations to build towers instead of hard coding them. Stay tune!
+I also employed template matching so that I can obtain the coordinates to build the towers by having an image of a tower-construction image and match against an initial screenshot of the map. This was done using skimage normalized cross-correlation. Refer to [here](https://github.com/mapattacker/cheatsheets/blob/master/python/skimage-tutorial.ipynb) on how the code works (go to template matching section).
 
 ### Dependencies
-__Python__: pyautogui, pytesseract, pillow, numpy
+__Python__: pyautogui, pytesseract, skimage, pillow, numpy
 
 __Chrome Vysor__: mobile mirroring software
 
