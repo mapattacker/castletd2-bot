@@ -4,11 +4,13 @@ Games nowadays usually require insane amount of time to farm resources for upgra
 
 There are two ways to overcome this. One is to install the mobile OS in a virtual machine in a PC; second is to mirror the mobile OS into the PC. Then the script is  ran in a PC environment.
 
-The python library pyautogui help to simulate mouse-clicks on the window so that an entirely rule-based system based on clicking an x,y coordinate can be coded. This example uses stage **15-3** of the game **Castle TD2**. It will build and upgrade all towers to reach the last level in the stage but not completing it (completing a stage drastically reduces the amount of diamonds collected on subsequent tries). 
+The python library pyautogui help to simulate mouse-clicks on the window so that a rule-based system based on clicking an x,y coordinate can be coded. This example uses stage **15-3** of the game **Castle TD2**. It will build and upgrade all towers to reach the last level in the stage but not completing it (completing a stage drastically reduces the amount of diamonds collected on subsequent tries).
+
+To further automate the bot, I used periodic screenshots and various image recognition techniques on the images to decide on various actions.
 
 #### Using OCR
 
-I have added a level of intelligence to the bot using object character recognition (OCR). The script takes screenshots of the game periodically and crop the image to a specific popup message to detect if the game has ended so that it can auto restart.
+I have added a level of intelligence to the bot using object character recognition (OCR). The script crop the screenshot to a specific popup message in order to detect if the game has ended so that it can auto restart.
 
 #### Using RBG Histogram Quantities
 
@@ -23,4 +25,6 @@ __Python__: pyautogui, pytesseract, skimage, pillow, numpy
 
 __Chrome Vysor__: mobile mirroring software
 
-![screenshot](https://github.com/mapattacker/castletd2-bot/blob/master/Screenshot.png)
+![screenshot](https://github.com/mapattacker/castletd2-bot/blob/master/img/Screenshot.png)
+
+![template matching](https://github.com/mapattacker/castletd2-bot/blob/master/img/templatematch.png)
