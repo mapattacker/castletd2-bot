@@ -110,8 +110,8 @@ def objectrecognition():
     os.system(screenshot)
     img = Image.open(img_path)
     cropped = img.crop(end_msg)
-    # declare OCR output variable as global
-    return pytesseract.image_to_string(cropped) # OCR to text
+    # OCR to text
+    return pytesseract.image_to_string(cropped)
 
 def colorrecognition(button):
     # screenshot to check for blue button position
