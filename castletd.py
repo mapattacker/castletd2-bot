@@ -33,8 +33,9 @@ map = (10,210,1240,690)
 speed = (552, 98)
 # upgrade to lasers
 upgrade = [(27,32),(0,-54),(29,-37),(0,-61)]
-hero = [(36, 183),(587, 136)]
-hero2 = (36, 138)
+hero1 = (36, 183)
+hero2 = (587, 136)
+hero3 = (36, 138)
 start = (337, 372)
 # back button of vysor
 backbutton = (102, 418) # horizontal
@@ -263,11 +264,11 @@ for num in range(1,10):
     end = 0
     startt = time.time()
     # shift heros
-    for i in hero:
-        pyautogui.click(i)
-        pyautogui.click(181, 272)
-
+    pyautogui.click(hero1)
+    pyautogui.click(141, 222)
     pyautogui.click(hero2)
+    pyautogui.click(181, 272)
+    pyautogui.click(hero3)
     pyautogui.click(435, 266)
 
     # speed up
@@ -289,16 +290,16 @@ for num in range(1,10):
         pyautogui.click(start)
 
     # click for next round
-    for aa in range(6):
+    for aa in range(3):
         pyautogui.click(start)
-        time.sleep(1)
+        time.sleep(2)
 
     upgrade1st()
 
     # click for next round
-    for aa in range(7):
+    for aa in range(3):
         pyautogui.click(start)
-        time.sleep(1)
+        time.sleep(2)
 
     upgrade2nd()
     finalupgrade()

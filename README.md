@@ -20,6 +20,10 @@ The 2nd level of intelligence, while a rudimentary form of classification, is ef
 
 I also employed template matching so that I can obtain the coordinates to build the towers by having an image of a tower-construction image and match against an initial screenshot of the map. This was done using skimage normalized cross-correlation. Refer to [here](https://github.com/mapattacker/cheatsheets/blob/master/python/skimage-tutorial.ipynb) on how the code works (go to template matching section).
 
+#### Future...
+
+Employ image segmentation to find area of path where heros can walk. Script to define all tower upgrades. Reinforcement learning to find the best way to win the game.
+
 ### Dependencies
 __Python__: pyautogui, pytesseract, skimage, pillow, numpy
 
